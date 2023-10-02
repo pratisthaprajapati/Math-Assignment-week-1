@@ -1,0 +1,48 @@
+
+import numpy  as np
+import matplotlib.pyplot as plt
+
+def to_get_mean(list):
+  
+  sum = 0
+  for i in list:
+    sum += i
+  return sum / len(list)
+
+def to_get_median(list):
+ 
+  list.sort()
+  if len(list) % 2 == 1:
+    return list[len(list) // 2]
+  else:
+    return (list[len(list) // 2] + list[len(list) // 2 - 1]) / 2
+
+def to_get_standard_deviation(list):
+  
+  mean = to_get_mean(list)
+  squared_differences = []
+  for i in list:
+    squared_differences.append((i - mean)**2)
+  variance = sum(squared_differences) / len(list)
+  standard_deviation = (variance)**0.5
+  return standard_deviation
+
+
+list = np.random.normal(10, 0.5, 500)
+
+mean = to_get_mean(list)
+median = to_get_median(list)
+standard_deviation = to_get_standard_deviation(list)
+
+print("your mean is:", round(mean,2))
+print("your median is:",round(median,2))
+print("your standard deviation is:", round(standard_deviation,2))
+
+def plot_histogram(list,bins=10):
+    plt.hist(list, bins=10)
+    plt.xlabel("Value")
+    plt.ylabel("Frequency")
+    plt.title("Histogram of 500 Random Numbers from a Gaussian Distribution")
+    plt.show()
+
+plot_histogram(list)    
